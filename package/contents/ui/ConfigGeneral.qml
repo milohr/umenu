@@ -41,7 +41,7 @@ Item {
     property string cfg_customButtonImage: plasmoid.configuration.customButtonImage
 
     property alias cfg_appNameFormat: appNameFormat.currentIndex
-    property alias cfg_switchCategoriesOnHover: switchCategoriesOnHover.checked
+    property alias cfg_favoritesFirst: favoritesFirst.checked
 
     property alias cfg_useExtraRunners: useExtraRunners.checked
 
@@ -176,9 +176,9 @@ Item {
                 }
 
                 CheckBox {
-                    id: switchCategoriesOnHover
+                    id: favoritesFirst
 
-                    text: i18n("Switch categories on hover")
+                    text: i18n("Show favorities as first ")
                 }
             }
         }

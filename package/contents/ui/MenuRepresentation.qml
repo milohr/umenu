@@ -73,7 +73,7 @@ PlasmaCore.Dialog {
         searchField.text = "";
 
         pageListScrollArea.focus = true;
-        pageList.currentIndex = 1;
+        pageList.currentIndex = plasmoid.configuration.favoritesFirst ? 0 : 1;
         pageList.currentItem.itemGrid.currentIndex = -1;
     }
 
@@ -233,7 +233,11 @@ PlasmaCore.Dialog {
             }
 
             onModelChanged: {
-                currentIndex = 0;
+                if (pageList.model == runnerModel) {
+                    currentIndex = 0;
+                } else {
+                    currentIndex = plasmoid.configuration.favoritesFirst ? 0 : 1;
+                }
             }
 
             onFlickingChanged: {
@@ -491,34 +495,6 @@ PlasmaCore.Dialog {
                     if (!containsMouse) {
                         updateCurrentItemTimer.stop();
                     }
-                }
-
-                onPressed: {
-                    if (!plasmoid.configuration.switchCategoriesOnHover) {
-                        ListView.view.currentIndex = index;
-                    }
-                }
-
-                onPositionChanged: { // Lazy menu implementation.
-                    if (!plasmoid.configuration.switchCategoriesOnHover) {
-                        return;
-                    }
-
-                    mouseCol = mouse.x;
-
-                    if (index == ListView.view.currentIndex) {
-                        updateCurrentItem();
-                    } else if ((index == ListView.view.currentIndex - 1) && mouse.y < (item.height - 6)
-                        || (index == ListView.view.currentIndex + 1) && mouse.y > 5) {
-
-                        if (mouse.x > ListView.view.eligibleWidth - 5) {
-                            updateCurrentItem();
-                        }
-                    } else if (mouse.x > ListView.view.eligibleWidth) {
-                        updateCurrentItem();
-                    }
-
-                    updateCurrentItemTimer.start();
                 }
 
                 function updateCurrentItem() {
