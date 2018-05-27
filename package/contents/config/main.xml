@@ -58,5 +58,8 @@
       <label>Are the favorites ported to use KActivitiesStats to allow per-activity favorites</label>
       <default>false</default>
     </entry>
+    <entry name="gridSize" type="Int">
+      <default>2</default>
+    </entry>
   </group>
 </kcfg>

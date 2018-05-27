@@ -42,6 +42,7 @@ Item {
 
     property alias cfg_appNameFormat: appNameFormat.currentIndex
     property alias cfg_favoritesFirst: favoritesFirst.checked
+    property alias cfg_gridSize: gridSize.currentIndex
 
     property alias cfg_useExtraRunners: useExtraRunners.checked
 
@@ -179,6 +180,20 @@ Item {
                     id: favoritesFirst
 
                     text: i18n("Show favorities as first ")
+                }
+
+                RowLayout {
+                    Label {
+                        text: i18n("Grid size:")
+                    }
+
+                    ComboBox {
+                        id: gridSize
+
+                        Layout.fillWidth: true
+
+                        model: [i18n("Small"), i18n("Medium"), i18n("Big")]
+                    }
                 }
             }
         }

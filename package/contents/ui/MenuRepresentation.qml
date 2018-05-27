@@ -36,11 +36,28 @@ PlasmaCore.Dialog {
     location: PlasmaCore.Types.FullScreen
     hideOnWindowDeactivate: false
 
-    property int iconSize: units.iconSizes.huge * 1.2
-    property int cellSize: iconSize + theme.mSize(theme.defaultFont).height
-        + (14 * units.smallSpacing)
-        + (2 * Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
-                        highlightItemSvg.margins.left + highlightItemSvg.margins.right))
+    property int iconSize: plasmoid.configuration.gridSize == 0 ? units.iconSizes.huge : units.iconSizes.huge * 1.2
+
+    property int cellSize: {
+     if (plasmoid.configuration.gridSize == 0) {
+         iconSize + theme.mSize(theme.defaultFont).height
+         + (2 * units.smallSpacing)
+         + (2 * Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
+                         highlightItemSvg.margins.left + highlightItemSvg.margins.right))
+     } else if (plasmoid.configuration.gridSize == 1) {
+         iconSize + theme.mSize(theme.defaultFont).height
+         + (10 * units.smallSpacing)
+         + (2 * Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
+                         highlightItemSvg.margins.left + highlightItemSvg.margins.right))
+     } else {
+         iconSize + theme.mSize(theme.defaultFont).height
+         + (14 * units.smallSpacing)
+         + (2 * Math.max(highlightItemSvg.margins.top + highlightItemSvg.margins.bottom,
+                         highlightItemSvg.margins.left + highlightItemSvg.margins.right))
+     }
+    }
+
+
     property bool searching: (searchField.text != "")
 
     onVisibleChanged: {
